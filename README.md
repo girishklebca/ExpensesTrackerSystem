@@ -15,6 +15,7 @@ A full-stack expense tracking application built with React, Redux Toolkit, Node.
 ## Tech Stack
 
 ### Frontend
+
 - React 19 + TypeScript
 - Redux Toolkit & RTK Query
 - Material-UI (MUI)
@@ -23,6 +24,7 @@ A full-stack expense tracking application built with React, Redux Toolkit, Node.
 - Vite
 
 ### Backend
+
 - Node.js + Express
 - MongoDB + Mongoose
 - CORS enabled
@@ -31,6 +33,7 @@ A full-stack expense tracking application built with React, Redux Toolkit, Node.
 ## Getting Started
 
 ### Prerequisites
+
 - Node.js (v16 or higher)
 - MongoDB Atlas account or local MongoDB
 - npm or yarn
@@ -38,24 +41,28 @@ A full-stack expense tracking application built with React, Redux Toolkit, Node.
 ### Installation
 
 1. **Clone the repository**
+
 ```bash
 git clone https://github.com/girishklebca/ExpensesTrackerSystem.git
 cd ExpensesTrackerSystem
 ```
 
 2. **Setup Backend**
+
 ```bash
 cd Backend
 npm install
 ```
 
 Create a `.env` file in the Backend folder:
+
 ```env
 MONGO_URI=your_mongodb_connection_string
 PORT=5000
 ```
 
 3. **Setup Frontend**
+
 ```bash
 cd ../Frontend
 npm install
@@ -64,17 +71,21 @@ npm install
 ### Running the Application
 
 1. **Start the Backend Server**
+
 ```bash
 cd Backend
 npm run server
 ```
+
 Backend will run on `http://localhost:5000`
 
 2. **Start the Frontend (in a new terminal)**
+
 ```bash
 cd Frontend
 npm run dev
 ```
+
 Frontend will run on `http://localhost:5173`
 
 ## Project Structure
@@ -122,6 +133,7 @@ ExpensesTrackerSystem/
 ## Features Overview
 
 ### Dashboard
+
 - Monthly income & expense tracking
 - Savings rate calculation
 - Line chart for spending trends
@@ -129,6 +141,7 @@ ExpensesTrackerSystem/
 - Recent transactions list
 
 ### Transactions Page
+
 - Add new income/expense
 - Category selection (8 categories)
 - Search functionality
@@ -136,6 +149,7 @@ ExpensesTrackerSystem/
 - Form validation with notifications
 
 ### Categories
+
 - Income
 - Food & Dining
 - Transportation
@@ -160,6 +174,7 @@ This project is open source and available under the MIT License.
 ## Author
 
 **Girish**
+
 - GitHub: [@girishklebca](https://github.com/girishklebca)
 
 ## Acknowledgments

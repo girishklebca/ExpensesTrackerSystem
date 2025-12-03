@@ -2,7 +2,10 @@ import React from "react";
 import { FaArrowTrendUp, FaArrowRight, FaMobileScreen } from "react-icons/fa6";
 import { VscGraph } from "react-icons/vsc";
 import { MdOutlineSecurity } from "react-icons/md";
+import { useNavigate } from "react-router-dom";
+
 const Home = () => {
+  const naviagte = useNavigate();
   return (
     <>
       <div
@@ -24,10 +27,16 @@ const Home = () => {
           management <br /> platform.
         </p>
         <div className="flex gap-4 relative -top-8 ">
-          <button className="bg-sky-500 text-white px-6 py-2 rounded-lg hover:bg-sky-700 font-medium">
+          <button
+            className="bg-sky-500 text-white px-6 py-2 rounded-lg hover:bg-sky-700 font-medium"
+            onClick={() => naviagte("/transactions")}
+          >
             Get Started
           </button>
-          <button className="bg-gray-200 text-gray-800 px-6 py-2 rounded-lg hover:bg-gray-300 font-medium">
+          <button
+            className="bg-gray-200 text-gray-800 px-6 py-2 rounded-lg hover:bg-gray-300 font-medium"
+            onClick={() => naviagte("/dashboard")}
+          >
             View Demo
           </button>
         </div>
