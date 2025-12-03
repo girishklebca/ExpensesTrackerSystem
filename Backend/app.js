@@ -1,0 +1,32 @@
+import express from "express";
+import cors from "cors";
+import dotenv from "dotenv";
+import connectDB from "./config/db.js";
+import transactionRoutes from "./routes/transactionRoutes.js";
+
+// Load environment variables
+dotenv.config();
+
+// Initialize Express app
+const app = express();
+const port = process.env.PORT || 5000;
+
+// Connect to MongoDB
+connectDB();
+
+// Middleware
+app.use(cors());
+app.use(express.json());
+
+// Routes
+app.use("/api/transactions", transactionRoutes);
+
+// Root route
+app.get("/", (req, res) => {
+  res.json({ message: "Transaction Tracker API" });
+});
+
+// Start server
+app.listen(port, () => {
+  console.log(`Server running on port:${port}✅`);
+});
