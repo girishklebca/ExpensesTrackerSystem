@@ -1,22 +1,25 @@
 import React from "react";
 import { Link, useLocation } from "react-router-dom";
 import { PiDropboxLogoFill } from "react-icons/pi";
-import {
-  FaHome,
-  FaRegCreditCard,
-  FaChartPie,
-  FaUser,
-} from "react-icons/fa";
+import { FaHome, FaRegCreditCard, FaChartPie, FaUser } from "react-icons/fa";
 import { MdDashboard } from "react-icons/md";
+import { BsTagsFill } from "react-icons/bs";
 const Navbar = () => {
-  const tabs = ["Home", "Dashboard", "Transactions", "Reports"];
-  const routes = ["/", "/dashboard", "/transactions", "/Reports"];
+  const tabs = ["Home", "Dashboard", "Transactions", "Reports", "Categories"];
+  const routes = [
+    "/",
+    "/dashboard",
+    "/transactions",
+    "/reports",
+    "/categories",
+  ];
 
   const icons = [
     <FaHome />,
     <MdDashboard />,
     <FaRegCreditCard />,
     <FaChartPie />,
+    <BsTagsFill />,
   ];
   const location = useLocation();
 
@@ -24,7 +27,10 @@ const Navbar = () => {
     <div className="h-[10vh]   flex  justify-between items-center bg-[#039fab] text-white">
       <div className="flex h-full items-center">
         <Link to={"/"}>
-          <p className="ml-50 text-3xl flex items-center"><PiDropboxLogoFill/><span className="text-xl ml-2">ETS</span></p>
+          <p className="ml-50 text-3xl flex items-center">
+            <PiDropboxLogoFill />
+            <span className="text-xl ml-2">ETS</span>
+          </p>
         </Link>
 
         <ul className="flex items-center gap-2 ml-25 h-full">

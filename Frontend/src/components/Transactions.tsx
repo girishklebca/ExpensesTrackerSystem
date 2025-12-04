@@ -5,6 +5,7 @@ import {
   useAddTransactionMutation,
   useDeleteTransactionMutation,
 } from "../store/api/transactionsApi";
+import { useGetCategoriesQuery } from "../store/api/categoriesApi";
 import {
   FaArrowUp,
   FaArrowDown,
@@ -42,6 +43,7 @@ const Transactions = () => {
     error,
   } = useGetTransactionsQuery();
   const { data: summary } = useGetSummaryQuery();
+  const { data: categories = [] } = useGetCategoriesQuery();
   const [addTransaction, { isLoading: isAdding }] = useAddTransactionMutation();
   const [deleteTransaction] = useDeleteTransactionMutation();
 
@@ -299,10 +301,11 @@ const Transactions = () => {
               className="px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-cyan-500 focus:border-transparent"
             >
               <option>All Categories</option>
-              <option>Income</option>
-              <option>Food & Dining</option>
-              <option>Transportation</option>
-              <option>Entertainment</option>
+              {categories.map((category) => (
+                <option key={category._id} value={category.name}>
+                  {category.icon} {category.name}
+                </option>
+              ))}
             </select>
           </div>
         </div>
@@ -463,14 +466,20 @@ const Transactions = () => {
                   },
                 }}
               >
-                <MenuItem value="Income">Income</MenuItem>
-                <MenuItem value="Food & Dining">Food & Dining</MenuItem>
-                <MenuItem value="Transportation">Transportation</MenuItem>
-                <MenuItem value="Entertainment">Entertainment</MenuItem>
-                <MenuItem value="Shopping">Shopping</MenuItem>
-                <MenuItem value="Health">Health</MenuItem>
-                <MenuItem value="Bills & Utilities">Bills & Utilities</MenuItem>
-                <MenuItem value="Other">Other</MenuItem>
+                {categories.length > 0 ? (
+                  categories.map((category) => (
+                    <MenuItem key={category._id} value={category.name}>
+                      <span className="flex items-center gap-2">
+                        <span>{category.icon}</span>
+                        {category.name}
+                      </span>
+                    </MenuItem>
+                  ))
+                ) : (
+                  <MenuItem disabled>
+                    No categories available. Add one in Categories page.
+                  </MenuItem>
+                )}
               </Select>
             </FormControl>
             <TextField
