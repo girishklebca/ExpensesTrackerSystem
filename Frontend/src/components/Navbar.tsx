@@ -67,9 +67,9 @@ const Navbar = () => {
       <div className="hidden md:block">
         <Link to={"/profile"}>
           <p
-            className={`p-3 flex justify-center items-center gap-2 text-[16px] rounded-2xl hover:bg-white/20 transition-colors ${
+            className={`p-3 flex justify-center items-center gap-2 text-[16px] rounded-2xl hover:bg-white hover:text-black transition-colors ${
               location.pathname === "/profile"
-                ? "bg-white text-[#039fab]"
+                ? "bg-white text-[#000]"
                 : "text-white"
             }`}
           >

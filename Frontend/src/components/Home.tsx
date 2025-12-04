@@ -15,13 +15,13 @@ const Home = () => {
             "linear-gradient(180deg, rgba(255, 255, 255, 1) 10%, rgba(136, 202, 207, 1) 100%)",
         }}
       >
-        <p className="text-xs md:text-md flex justify-center items-center gap-2 text-white px-3 md:px-4 py-2 rounded-2xl bg-cyan-500">
+        <p className="text-md md:text-md flex justify-center items-center gap-2 text-white px-3 md:px-4 py-2 rounded-2xl bg-cyan-500">
           {<FaArrowTrendUp />}Take Control of your Finances
         </p>
         <h1 className="text-3xl md:text-5xl lg:text-[56px] text-center font-bold leading-tight md:leading-[80px] px-4">
           Manage Your Expenses <br className="hidden md:block" /> Effortlessly
         </h1>
-        <p className="text-sm md:text-base lg:text-[18px] text-center text-gray-500 px-4 max-w-2xl">
+        <p className="text-sm md:text-base lg:text-[18px] text-center text-black px-4 max-w-2xl">
           Track your income and expenses, categorize transactions, and gain
           valuable insights into your spending habits with our intuitive expense
           management platform.
@@ -96,7 +96,7 @@ const Home = () => {
         <h1 className="text-2xl md:text-3xl lg:text-4xl font-bold text-center px-4">
           Everything you need to manage your finances
         </h1>
-        <p className="text-center text-sm md:text-base text-gray-500 px-4">
+        <p className="text-center text-sm md:text-base text-black px-4">
           Our comprehensive suite of tools helps you understand, track, and
           optimize your <br /> financial health.
         </p>
@@ -111,8 +111,8 @@ const Home = () => {
               <VscGraph />
             </div>
             <div>
-              <p className="font-medium text-gray-800">Smart Analytics</p>
-              <p className="text-xs md:text-[12px] mt-2 text-gray-600">
+              <p className="font-lg text-gray-800">Smart Analytics</p>
+              <p className="text-xl md:text-[12px] mt-2 text-gray-600">
                 Get detailed insights into your spending patterns with
                 interactive charts and reports.
               </p>

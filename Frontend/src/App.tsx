@@ -6,6 +6,7 @@ import Transactions from "./components/Transactions";
 import Dashboard from "./components/Dashboard";
 import Reports from "./components/Reports";
 import Categories from "./components/Categories";
+import Profile from "./components/Profile";
 
 const App = () => {
   return (
@@ -17,6 +18,7 @@ const App = () => {
         <Route path="/transactions" element={<Transactions />} />
         <Route path="/reports" element={<Reports />} />
         <Route path="/categories" element={<Categories />} />
+        <Route path="/profile" element={<Profile />} />
       </Routes>
     </>
   );

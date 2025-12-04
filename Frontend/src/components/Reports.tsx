@@ -30,21 +30,21 @@ const Reports = () => {
 
   // Calculate monthly data for Income vs Expenses chart
   const monthlyData = [
-    { month: "Jan", income: 4000, expenses: 3200 },
-    { month: "Feb", income: 5200, expenses: 3100 },
-    { month: "Mar", income: 4900, expenses: 3300 },
-    { month: "Apr", income: 5500, expenses: 3200 },
-    { month: "May", income: 4500, expenses: 3100 },
-    { month: "Jun", income: 5400, expenses: 3100 },
+    { month: "Jan", income: 4000, expenses: 4200 },
+    { month: "Feb", income: 5500, expenses: 3100 },
+    { month: "Mar", income: 3900, expenses: 3800 },
+    { month: "Apr", income: 5500, expenses: 2200 },
+    { month: "May", income: 2500, expenses: 3100 },
+    { month: "Jun", income: 4400, expenses: 1900 },
   ];
 
   // Calculate savings trend data
   const savingsTrend = [
     { month: "Jan", savings: 1600 },
-    { month: "Feb", savings: 2100 },
-    { month: "Mar", savings: 1600 },
+    { month: "Feb", savings: 2800 },
+    { month: "Mar", savings: 1800 },
     { month: "Apr", savings: 2300 },
-    { month: "May", savings: 1900 },
+    { month: "May", savings: 1500 },
     { month: "Jun", savings: 2300 },
   ];
 
