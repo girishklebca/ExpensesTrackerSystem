@@ -101,23 +101,23 @@ const Reports = () => {
   const monthlyExpenses = 3280;
 
   return (
-    <div className="min-h-[90vh] bg-gray-50 p-8 page-enter">
+    <div className="min-h-[90vh] bg-gray-50 p-4 md:p-8 page-enter">
       <div className="max-w-7xl mx-auto">
         {/* Header */}
-        <div className="flex justify-between items-center mb-8">
+        <div className="flex flex-col md:flex-row justify-between items-start md:items-center mb-6 md:mb-8 gap-4">
           <div>
-            <h1 className="text-3xl font-bold text-gray-800">
+            <h1 className="text-2xl md:text-3xl font-bold text-gray-800">
               Financial Reports
             </h1>
-            <p className="text-gray-500 mt-1">
+            <p className="text-sm md:text-base text-gray-500 mt-1">
               Analyze your spending patterns and financial health
             </p>
           </div>
-          <div className="flex items-center gap-4">
+          <div className="flex flex-col sm:flex-row items-start sm:items-center gap-3 md:gap-4 w-full md:w-auto">
             <select
               value={selectedPeriod}
               onChange={(e) => setSelectedPeriod(e.target.value)}
-              className="px-6 py-3 border border-gray-300 rounded-lg bg-white focus:outline-none focus:ring-2 focus:ring-cyan-500"
+              className="w-full sm:w-auto px-4 md:px-6 py-2 md:py-3 border border-gray-300 rounded-lg bg-white focus:outline-none focus:ring-2 focus:ring-cyan-500 text-sm md:text-base"
             >
               <option>Last Year</option>
               <option>Last 6 Months</option>
@@ -131,7 +131,7 @@ const Reports = () => {
         </div>
 
         {/* Summary Cards */}
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-6 mb-8">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6 mb-6 md:mb-8">
           {/* Average Monthly Savings */}
           <div className="bg-gradient-to-br from-green-50 to-green-100 rounded-2xl p-6 shadow-md border border-green-200">
             <div className="flex items-center gap-2 mb-2">
@@ -190,10 +190,10 @@ const Reports = () => {
         </div>
 
         {/* Tabs */}
-        <div className="flex gap-4 mb-6 border-b border-gray-200">
+        <div className="flex gap-2 md:gap-4 mb-6 border-b border-gray-200 overflow-x-auto">
           <button
             onClick={() => setActiveTab("Overview")}
-            className={`pb-3 px-2 border-b-2 transition-colors ${
+            className={`pb-3 px-3 md:px-4 border-b-2 transition-colors text-sm md:text-base whitespace-nowrap ${
               activeTab === "Overview"
                 ? "border-cyan-500 text-cyan-600 font-medium"
                 : "border-transparent text-gray-500 hover:text-gray-700"
@@ -203,7 +203,7 @@ const Reports = () => {
           </button>
           <button
             onClick={() => setActiveTab("Categories")}
-            className={`pb-3 px-2 border-b-2 transition-colors ${
+            className={`pb-3 px-3 md:px-4 border-b-2 transition-colors text-sm md:text-base whitespace-nowrap ${
               activeTab === "Categories"
                 ? "border-cyan-500 text-cyan-600 font-medium"
                 : "border-transparent text-gray-500 hover:text-gray-700"
@@ -213,7 +213,7 @@ const Reports = () => {
           </button>
           <button
             onClick={() => setActiveTab("Trends")}
-            className={`pb-3 px-2 border-b-2 transition-colors ${
+            className={`pb-3 px-3 md:px-4 border-b-2 transition-colors text-sm md:text-base whitespace-nowrap ${
               activeTab === "Trends"
                 ? "border-cyan-500 text-cyan-600 font-medium"
                 : "border-transparent text-gray-500 hover:text-gray-700"
@@ -223,7 +223,7 @@ const Reports = () => {
           </button>
           <button
             onClick={() => setActiveTab("Goals")}
-            className={`pb-3 px-2 border-b-2 transition-colors ${
+            className={`pb-3 px-3 md:px-4 border-b-2 transition-colors text-sm md:text-base whitespace-nowrap ${
               activeTab === "Goals"
                 ? "border-cyan-500 text-cyan-600 font-medium"
                 : "border-transparent text-gray-500 hover:text-gray-700"
@@ -237,10 +237,10 @@ const Reports = () => {
         {activeTab === "Overview" && (
           <>
             {/* Charts Grid */}
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-8">
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 md:gap-6 mb-6 md:mb-8">
               {/* Income vs Expenses Chart */}
-              <div className="bg-white rounded-2xl p-6 shadow-md">
-                <h3 className="text-lg font-semibold text-gray-800 mb-4">
+              <div className="bg-white rounded-2xl p-4 md:p-6 shadow-md">
+                <h3 className="text-base md:text-lg font-semibold text-gray-800 mb-4">
                   Income vs Expenses
                 </h3>
                 <ResponsiveContainer width="100%" height={300}>
@@ -265,8 +265,8 @@ const Reports = () => {
               </div>
 
               {/* Savings Trend */}
-              <div className="bg-white rounded-2xl p-6 shadow-md">
-                <h3 className="text-lg font-semibold text-gray-800 mb-4">
+              <div className="bg-white rounded-2xl p-4 md:p-6 shadow-md">
+                <h3 className="text-base md:text-lg font-semibold text-gray-800 mb-4">
                   Savings Trend
                 </h3>
                 <ResponsiveContainer width="100%" height={300}>

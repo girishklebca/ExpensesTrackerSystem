@@ -14,7 +14,7 @@ import {
   FaSearch,
   FaTrash,
   FaCalendar,
-  FaRegCreditCard,
+  FaTimes,
 } from "react-icons/fa";
 import {
   Dialog,
@@ -188,17 +188,19 @@ const Transactions = () => {
   }
 
   return (
-    <div className="min-h-[90vh] bg-gray-50 p-8 page-enter">
+    <div className="min-h-[90vh] bg-gray-50 p-4 md:p-8 page-enter">
       <div className="max-w-7xl mx-auto">
         {/* Header */}
-        <div className="flex justify-between items-center mb-8">
+        <div className="flex flex-col md:flex-row justify-between items-start md:items-center mb-6 md:mb-8 gap-4">
           <div>
-            <h1 className="text-3xl font-bold text-gray-800">Transactions</h1>
-            <p className="text-gray-500 mt-1">
+            <h1 className="text-2xl md:text-3xl font-bold text-gray-800">
+              Transactions
+            </h1>
+            <p className="text-sm md:text-base text-gray-500 mt-1">
               Manage your income and expenses
             </p>
           </div>
-          <div className="flex gap-10">
+          <div className="flex flex-col sm:flex-row gap-3 md:gap-4 w-full md:w-auto">
             <button
               onClick={() => navigate("/dashboard")}
               className="bg-cyan-500 hover:bg-cyan-600 text-white px-6 py-3 rounded-lg flex items-center gap-2 transition-colors duration-200 shadow-lg"
@@ -217,7 +219,7 @@ const Transactions = () => {
         </div>
 
         {/* Summary Cards */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-6 mb-6 md:mb-8">
           {/* Total Income */}
           <div className="bg-linear-to-br from-green-50 to-green-100 rounded-2xl p-6 shadow-md border border-green-200">
             <div className="flex justify-between items-start mb-4">
@@ -269,8 +271,8 @@ const Transactions = () => {
         </div>
 
         {/* Search and Filters */}
-        <div className="bg-white rounded-2xl p-6 mb-6 shadow-md">
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+        <div className="bg-white rounded-2xl p-4 md:p-6 mb-4 md:mb-6 shadow-md">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-3 md:gap-4">
             {/* Search */}
             <div className="relative">
               <FaSearch className="absolute left-4 top-1/2 transform -translate-y-1/2 text-gray-400" />
@@ -323,7 +325,7 @@ const Transactions = () => {
               filteredTransactions.map((transaction) => (
                 <div
                   key={transaction._id}
-                  className="p-6 hover:bg-gray-50 transition-colors duration-150 flex items-center justify-between group"
+                  className="p-4 md:p-6 hover:bg-gray-50 transition-colors duration-150 flex flex-col sm:flex-row items-start sm:items-center justify-between group gap-3 sm:gap-0"
                 >
                   <div className="flex items-center gap-4 flex-1">
                     {/* Icon */}
@@ -399,6 +401,10 @@ const Transactions = () => {
         </div>
       </div>
 
+      {/* =========================================================================== */}
+      {/* =========================================================================== */}
+      {/* =========================================================================== */}
+
       {/* Add Transaction Dialog */}
       <Dialog
         open={openDialog}
@@ -407,11 +413,17 @@ const Transactions = () => {
         fullWidth
         disableScrollLock
         sx={{
-          mt: "-50px",
+          mt: "0px",
         }}
       >
-        <DialogTitle className="text-xl text-center font-semibold">
+        <DialogTitle className="text-xl text-center font-semibold relative">
           Add New Transaction
+          <button
+            onClick={() => setOpenDialog(false)}
+            className="absolute right-4 top-1/2 -translate-y-1/2 text-white hover:text-white cursor-pointer hover:bg-black transition-colors bg-gray-500 rounded-4xl p-2"
+          >
+            <FaTimes size={20} />
+          </button>
         </DialogTitle>
         <DialogContent>
           <div className="space-y-4 h-100 mt-4 flex flex-col justify-around">
@@ -422,7 +434,7 @@ const Transactions = () => {
                 onClick={() =>
                   setNewTransaction({ ...newTransaction, type: "expense" })
                 }
-                className={`flex-1 py-3 px-4 rounded-lg border-2 transition-all duration-200 flex items-center justify-center gap-2 ${
+                className={`flex-1 py-3 px-4 rounded-lg border-2 transition-all duration-200 flex items-center justify-center gap-2 hover:cursor-pointer ${
                   newTransaction.type === "expense"
                     ? "border-red-500 bg-red-50 text-red-700"
                     : "border-gray-300 bg-white text-gray-600 hover:border-gray-400"
@@ -436,7 +448,7 @@ const Transactions = () => {
                 onClick={() =>
                   setNewTransaction({ ...newTransaction, type: "income" })
                 }
-                className={`flex-1 py-3 px-4 rounded-lg border-2 transition-all duration-200 flex items-center justify-center gap-2 ${
+                className={`flex-1 py-3 px-4 rounded-lg border-2 transition-all duration-200 flex items-center justify-center gap-2 hover:cursor-pointer ${
                   newTransaction.type === "income"
                     ? "border-green-500 bg-green-50 text-green-700"
                     : "border-gray-300 bg-white text-gray-600 hover:border-gray-400"
@@ -446,42 +458,79 @@ const Transactions = () => {
                 Income
               </button>
             </div>
-            <FormControl fullWidth>
-              <InputLabel>Category</InputLabel>
-              <Select
-                value={newTransaction.category}
-                label="Category"
-                onChange={(e: SelectChangeEvent) =>
-                  setNewTransaction({
-                    ...newTransaction,
-                    category: e.target.value,
-                  })
-                }
-                MenuProps={{
-                  disablePortal: true,
-                  PaperProps: {
-                    style: {
-                      maxHeight: 500,
+            <div className="flex justify-between items-center">
+              <FormControl
+                sx={{
+                  width: "300px",
+                  "& .MuiOutlinedInput-root": {
+                    "& fieldset": {
+                      borderColor: "#000000",
                     },
+                    "&:hover fieldset": {
+                      borderColor: "#000000",
+                    },
+                    "&.Mui-focused fieldset": {
+                      borderColor: "#000000",
+                    },
+                  },
+                  "& .MuiInputLabel-root": {
+                    color: "#000000",
+                  },
+                  "& .MuiSelect-select": {
+                    color: "#000000",
                   },
                 }}
               >
-                {categories.length > 0 ? (
-                  categories.map((category) => (
-                    <MenuItem key={category._id} value={category.name}>
-                      <span className="flex items-center gap-2">
-                        <span>{category.icon}</span>
-                        {category.name}
-                      </span>
+                <InputLabel>Category</InputLabel>
+                <Select
+                  value={newTransaction.category}
+                  label="Category"
+                  onChange={(e: SelectChangeEvent) =>
+                    setNewTransaction({
+                      ...newTransaction,
+                      category: e.target.value,
+                    })
+                  }
+                  MenuProps={{
+                    disablePortal: true,
+                    PaperProps: {
+                      style: {
+                        maxHeight: 500,
+                      },
+                    },
+                  }}
+                >
+                  {categories.length > 0 ? (
+                    categories.map((category) => (
+                      <MenuItem key={category._id} value={category.name}>
+                        <span className="flex items-center gap-2">
+                          <span>{category.icon}</span>
+                          {category.name}
+                        </span>
+                      </MenuItem>
+                    ))
+                  ) : (
+                    <MenuItem disabled>
+                      No categories available. Add one in Categories page.
                     </MenuItem>
-                  ))
-                ) : (
-                  <MenuItem disabled>
-                    No categories available. Add one in Categories page.
-                  </MenuItem>
-                )}
-              </Select>
-            </FormControl>
+                  )}
+                </Select>
+              </FormControl>
+              <Button
+                onClick={() => navigate("/categories")}
+                color="inherit"
+                disabled={isAdding}
+                sx={{
+                  bgcolor: "#0891B2",
+                  color: "white",
+                  px: "24px",
+                  py: "12px",
+                }}
+              >
+                <FaPlus />
+                &nbsp; Add Category
+              </Button>
+            </div>
             <TextField
               fullWidth
               label="Transaction Title"
@@ -490,6 +539,25 @@ const Transactions = () => {
               onChange={(e) =>
                 setNewTransaction({ ...newTransaction, title: e.target.value })
               }
+              sx={{
+                "& .MuiOutlinedInput-root": {
+                  "& fieldset": {
+                    borderColor: "#000",
+                  },
+                  "&:hover fieldset": {
+                    borderColor: "#000",
+                  },
+                  "&.Mui-focused fieldset": {
+                    borderColor: "#000",
+                  },
+                  "& input": {
+                    color: "#000",
+                  },
+                },
+                "& .MuiInputLabel-root": {
+                  color: "#000",
+                },
+              }}
             />
             <TextField
               fullWidth
@@ -500,37 +568,44 @@ const Transactions = () => {
               onChange={(e) =>
                 setNewTransaction({ ...newTransaction, amount: e.target.value })
               }
+              sx={{
+                "& .MuiOutlinedInput-root": {
+                  "& fieldset": {
+                    borderColor: "#000000",
+                  },
+                  "&:hover fieldset": {
+                    borderColor: "#000000",
+                  },
+                  "&.Mui-focused fieldset": {
+                    borderColor: "#000000",
+                  },
+                  "& input": {
+                    color: "#000000",
+                  },
+                },
+                "& .MuiInputLabel-root": {
+                  color: "#000000",
+                },
+              }}
             />
           </div>
         </DialogContent>
         <DialogActions
           sx={{
             display: "flex",
-            justifyContent: "space-between",
+            justifyContent: "center",
             alignItems: "center",
             px: "50px",
+            pb: "50px",
           }}
         >
-          <Button
-            onClick={() => setOpenDialog(false)}
-            color="inherit"
-            disabled={isAdding}
-            sx={{
-              bgcolor: "#ff0000",
-              color: "white",
-              px: "24px",
-              py: "12px",
-            }}
-          >
-            Cancel
-          </Button>
           <Button
             onClick={handleAddTransaction}
             variant="contained"
             className="bg-cyan-500"
             disabled={isAdding}
             sx={{
-              px: "24px",
+              px: "48px",
               py: "12px",
               bgcolor: "#0891B2",
             }}

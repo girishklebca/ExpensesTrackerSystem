@@ -25,6 +25,7 @@ import {
   FaPlus,
   FaTrash,
   FaEdit,
+  FaTimes,
 } from "react-icons/fa";
 
 const Categories = () => {
@@ -157,13 +158,15 @@ const Categories = () => {
   }
 
   return (
-    <div className="min-h-[90vh] bg-gray-50 p-8 page-enter">
+    <div className="min-h-[90vh] bg-gray-50 p-4 md:p-8 page-enter">
       <div className="max-w-7xl mx-auto">
         {/* Header */}
-        <div className="flex justify-between items-center mb-8">
+        <div className="flex flex-col md:flex-row justify-between items-start md:items-center mb-6 md:mb-8 gap-4">
           <div>
-            <h1 className="text-3xl font-bold text-gray-800">Categories</h1>
-            <p className="text-gray-500 mt-1">
+            <h1 className="text-2xl md:text-3xl font-bold text-gray-800">
+              Categories
+            </h1>
+            <p className="text-sm md:text-base text-gray-500 mt-1">
               Organize your transactions and set budgets
             </p>
           </div>
@@ -177,7 +180,7 @@ const Categories = () => {
         </div>
 
         {/* Summary Cards */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-6 mb-6 md:mb-8">
           {/* Total Budget */}
           <div className="bg-gradient-to-br from-blue-50 to-blue-100 rounded-2xl p-6 shadow-md border border-blue-200">
             <div className="flex justify-between items-start">
@@ -243,7 +246,7 @@ const Categories = () => {
             </h2>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
             {expenseCategories.length > 0 ? (
               expenseCategories.map((category) => {
                 const spent = getCategoryExpense(category.name);
@@ -319,7 +322,7 @@ const Categories = () => {
             </h2>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
             {incomeCategories.length > 0 ? (
               incomeCategories.map((category) => {
                 const earned = getCategoryIncome(category.name);
@@ -382,8 +385,14 @@ const Categories = () => {
       >
         <DialogTitle className="text-xl font-semibold">
           Add New Category
+          <button
+            onClick={() => setOpenDialog(false)}
+            className="absolute right-4 top-[40px] -translate-y-1/2 text-white hover:text-white cursor-pointer hover:bg-black transition-colors bg-gray-500 rounded-4xl p-2"
+          >
+            <FaTimes size={20} />
+          </button>
         </DialogTitle>
-        <DialogContent>
+        <DialogContent sx={{ padding: "24px", minHeight: "400px" }}>
           <div className="space-y-6 mt-4">
             {/* Category Name */}
             <TextField
@@ -396,7 +405,7 @@ const Categories = () => {
 
             {/* Icon Selection */}
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-3">
+              <label className="block text-sm font-medium text-gray-700 mt-3 mb-3">
                 Choose Icon
               </label>
               <div className="grid grid-cols-5 gap-3">
@@ -418,19 +427,26 @@ const Categories = () => {
             </div>
           </div>
         </DialogContent>
-        <DialogActions className="px-6 pb-4">
-          <Button
-            onClick={() => setOpenDialog(false)}
-            disabled={isAdding}
-            sx={{ color: "gray" }}
-          >
-            Cancel
-          </Button>
+        <DialogActions
+          className="px-6 pb-4"
+          sx={{
+            width: "100%",
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center",
+            mb: "20px",
+          }}
+        >
           <Button
             onClick={handleAddCategory}
             variant="contained"
             disabled={isAdding}
-            sx={{ bgcolor: "#0891B2", "&:hover": { bgcolor: "#0e7490" } }}
+            sx={{
+              bgcolor: "#0891B2",
+              px: "56px",
+              py: "10px",
+              "&:hover": { bgcolor: "#0e7490" },
+            }}
           >
             {isAdding ? "Adding..." : "Add Category"}
           </Button>

@@ -69,16 +69,16 @@ const Dashboard = () => {
   const recentTransactions = transactions.slice(0, 5);
 
   return (
-    <div className="min-h-[90vh] bg-gray-50 p-8 page-enter">
+    <div className="min-h-[90vh] bg-gray-50 p-4 md:p-8 page-enter">
       <div className="max-w-7xl mx-auto">
         {/* Header */}
-        <div className="flex justify-between items-center mb-8">
-          <div>
-            <h1 className="text-3xl font-bold text-gray-800">
+        <div className="flex flex-col md:flex-row justify-between items-start md:items-center mb-6 md:mb-8 gap-4">
+          <div className="flex-1">
+            <h1 className="text-2xl md:text-3xl font-bold text-gray-800">
               Welcome back! 👋
             </h1>
-            <p className="text-gray-500 mt-1">
-              Here's your financial overview for this month
+            <p className="text-sm md:text-base text-gray-500 mt-1">
+              Here's your financial overview for this month (Dashboard)
             </p>
           </div>
           <button
@@ -91,7 +91,7 @@ const Dashboard = () => {
         </div>
 
         {/* Summary Cards */}
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-6 mb-8">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6 mb-6 md:mb-8">
           {/* Total Balance */}
           <div className="bg-white rounded-2xl p-6 shadow-md border border-gray-200">
             <div className="flex items-center gap-3 mb-3">
@@ -160,10 +160,10 @@ const Dashboard = () => {
         </div>
 
         {/* Charts Section */}
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 mb-8">
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-4 md:gap-6 mb-6 md:mb-8">
           {/* Monthly Trend Chart */}
-          <div className="lg:col-span-2 bg-white rounded-2xl p-6 shadow-md">
-            <h3 className="text-lg font-semibold text-gray-800 mb-6">
+          <div className="lg:col-span-2 bg-white rounded-2xl p-4 md:p-6 shadow-md">
+            <h3 className="text-base md:text-lg font-semibold text-gray-800 mb-4 md:mb-6">
               Monthly Trend
             </h3>
             <ResponsiveContainer width="100%" height={300}>
@@ -191,8 +191,8 @@ const Dashboard = () => {
           </div>
 
           {/* Expense Categories Pie Chart */}
-          <div className="bg-white rounded-2xl p-6 shadow-md">
-            <h3 className="text-lg font-semibold text-gray-800 mb-6">
+          <div className="bg-white rounded-2xl p-4 md:p-6 shadow-md">
+            <h3 className="text-base md:text-lg font-semibold text-gray-800 mb-4 md:mb-6">
               Expense Categories
             </h3>
             <ResponsiveContainer width="100%" height={300}>
