@@ -9,7 +9,7 @@ import {
   FaTimes,
 } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
-import { MdDashboard } from "react-icons/md";
+import { FaHome } from "react-icons/fa";
 
 const Profile = () => {
   const navigate = useNavigate();
@@ -47,11 +47,11 @@ const Profile = () => {
             </p>
           </div>
           <button
-            onClick={() => navigate("/dashboard")}
+            onClick={() => navigate("/")}
             className="bg-cyan-500 hover:bg-cyan-600 text-white px-6 py-3 rounded-lg flex items-center gap-2 transition-colors duration-200 shadow-lg"
           >
-            <MdDashboard />
-            Go To Dashboard
+            <FaHome />
+            Go To HomePage
           </button>
         </div>
 

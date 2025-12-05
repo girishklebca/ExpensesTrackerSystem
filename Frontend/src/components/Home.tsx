@@ -178,7 +178,7 @@ const Home = () => {
           </p>
           <button
             className="flex  items-center justify-center gap-2 bg-white text-[#00a6f4] text-[12px] px-5 py-2 rounded-xl cursor-pointer"
-            onClick={() => navigate("/transactions")}
+            onClick={() => navigate("/profile")}
           >
             Start Your Journey Today <FaArrowRight />
           </button>

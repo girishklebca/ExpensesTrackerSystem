@@ -14,21 +14,21 @@ import { BsTagsFill } from "react-icons/bs";
 
 const Navbar = () => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
-  const tabs = ["Home", "Transactions", "Dashboard", "Reports", "Categories"];
+  const tabs = ["Home", "Dashboard", "Transactions", "Categories", "Reports"];
   const routes = [
     "/",
-    "/transactions",
     "/dashboard",
+    "/transactions",
+    "/categories"
     "/reports",
-    "/categories",
   ];
 
   const icons = [
     <FaHome />,
-    <FaRegCreditCard />,
     <MdDashboard />,
-    <FaChartPie />,
+    <FaRegCreditCard />,
     <BsTagsFill />,
+    <FaChartPie />,
   ];
   const location = useLocation();
 

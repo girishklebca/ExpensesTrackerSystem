@@ -24,7 +24,6 @@ import {
   FaArrowUp,
   FaPlus,
   FaTrash,
-  FaEdit,
   FaTimes,
 } from "react-icons/fa";
 

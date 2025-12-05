@@ -16,6 +16,7 @@ import {
   FaCalendar,
   FaTimes,
 } from "react-icons/fa";
+import CircularProgress from '@mui/material/CircularProgress';
 import {
   Dialog,
   DialogTitle,
@@ -155,8 +156,8 @@ const Transactions = () => {
     return (
       <div className="min-h-[90vh] bg-gray-50 p-8 flex items-center justify-center">
         <div className="text-center">
-          <div className="animate-spin rounded-full h-16 w-16 border-b-2 border-cyan-500 mx-auto mb-4"></div>
-          <p className="text-gray-600 text-lg">Loading transactions...</p>
+          <CircularProgress size={50}/>
+          <p className="text-gray-600 text-lg mt-5">Loading transactions...</p>
         </div>
       </div>
     );
