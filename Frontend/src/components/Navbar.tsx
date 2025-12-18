@@ -19,7 +19,7 @@ const Navbar = () => {
     "/",
     "/dashboard",
     "/transactions",
-    "/categories"
+    "/categories",
     "/reports",
   ];
 

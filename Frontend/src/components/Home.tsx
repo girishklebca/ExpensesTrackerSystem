@@ -29,13 +29,19 @@ const Home = () => {
         <div className="flex flex-col md:flex-row gap-3 md:gap-4 w-full md:w-auto px-4">
           <button
             className="bg-cyan-500 text-white px-6 py-2 rounded-lg hover:bg-cyan-700 font-medium cursor-pointer"
-            onClick={() => navigate("/transactions")}
+            onClick={() => {
+              navigate("/transactions");
+              window.scrollTo(0, 0);
+            }}
           >
             Get Started
           </button>
           <button
             className="bg-gray-200 text-gray-800 px-6 py-2 rounded-lg hover:bg-gray-300 font-medium cursor-pointer"
-            onClick={() => navigate("/dashboard")}
+            onClick={() => {
+              navigate("/dashboard");
+              window.scrollTo(0, 0);
+            }}
           >
             View Demo
           </button>

@@ -101,7 +101,7 @@ const Reports = () => {
   const monthlyExpenses = 3280;
 
   return (
-    <div className="min-h-[90vh] bg-gray-50 p-4 md:p-8 page-enter">
+    <div className="min-h-[90vh] bg-white p-4 md:p-8 page-enter">
       <div className="max-w-7xl mx-auto">
         {/* Header */}
         <div className="flex flex-col md:flex-row justify-between items-start md:items-center mb-6 md:mb-8 gap-4">
@@ -133,7 +133,7 @@ const Reports = () => {
         {/* Summary Cards */}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6 mb-6 md:mb-8">
           {/* Average Monthly Savings */}
-          <div className="bg-gradient-to-br from-green-50 to-green-100 rounded-2xl p-6 shadow-md border border-green-200">
+          <div className="bg-gradient-to-br from-green-50 to-green-100 rounded-2xl p-6 shadow-md border border-green-200 hover:scale-110 transition-all duration-700 cursor-pointer">
             <div className="flex items-center gap-2 mb-2">
               <FaArrowUp className="text-green-600 text-sm" />
               <span className="text-green-700 text-xs font-medium">+12%</span>
@@ -147,7 +147,7 @@ const Reports = () => {
           </div>
 
           {/* Savings Rate */}
-          <div className="bg-gradient-to-br from-blue-50 to-blue-100 rounded-2xl p-6 shadow-md border border-blue-200">
+          <div className="bg-gradient-to-br from-blue-50 to-blue-100 rounded-2xl p-6 shadow-md border border-blue-200 hover:scale-110 transition-all duration-700 cursor-pointer">
             <div className="flex items-center gap-2 mb-2">
               <FaArrowUp className="text-blue-600 text-sm" />
               <span className="text-blue-700 text-xs font-medium">39.5%</span>
@@ -159,7 +159,7 @@ const Reports = () => {
           </div>
 
           {/* Top Expense Category */}
-          <div className="bg-gradient-to-br from-purple-50 to-purple-100 rounded-2xl p-6 shadow-md border border-purple-200">
+          <div className="bg-gradient-to-br from-purple-50 to-purple-100 rounded-2xl p-6 shadow-md border border-purple-200 hover:scale-110 transition-all duration-700 cursor-pointer">
             <div className="flex items-center gap-2 mb-2">
               <FaArrowDown className="text-purple-600 text-sm" />
               <span className="text-purple-700 text-xs font-medium">
@@ -175,7 +175,7 @@ const Reports = () => {
           </div>
 
           {/* Monthly Expenses */}
-          <div className="bg-gradient-to-br from-orange-50 to-orange-100 rounded-2xl p-6 shadow-md border border-orange-200">
+          <div className="bg-gradient-to-br from-orange-50 to-orange-100 rounded-2xl p-6 shadow-md border border-orange-200 hover:scale-110 transition-all duration-700 cursor-pointer">
             <div className="flex items-center gap-2 mb-2">
               <FaArrowDown className="text-orange-600 text-sm" />
               <span className="text-orange-700 text-xs font-medium">-5%</span>
@@ -190,10 +190,10 @@ const Reports = () => {
         </div>
 
         {/* Tabs */}
-        <div className="flex gap-2 md:gap-4 mb-6 border-b border-gray-200 overflow-x-auto">
+        <div className="flex  mb-6 border-b border-gray-200 overflow-x-auto">
           <button
             onClick={() => setActiveTab("Overview")}
-            className={`pb-3 px-3 md:px-4 border-b-2 transition-colors text-sm md:text-base whitespace-nowrap ${
+            className={` p-3 md:px-4 border-b-2 transition-colors cursor-pointer hover:bg-gray-100 text-sm md:text-base whitespace-nowrap ${
               activeTab === "Overview"
                 ? "border-cyan-500 text-cyan-600 font-medium"
                 : "border-transparent text-gray-500 hover:text-gray-700"
@@ -203,7 +203,7 @@ const Reports = () => {
           </button>
           <button
             onClick={() => setActiveTab("Categories")}
-            className={`pb-3 px-3 md:px-4 border-b-2 transition-colors text-sm md:text-base whitespace-nowrap ${
+            className={` p-3 md:px-4 border-b-2 transition-colors cursor-pointer hover:bg-gray-100 text-sm md:text-base whitespace-nowrap ${
               activeTab === "Categories"
                 ? "border-cyan-500 text-cyan-600 font-medium"
                 : "border-transparent text-gray-500 hover:text-gray-700"
@@ -213,7 +213,7 @@ const Reports = () => {
           </button>
           <button
             onClick={() => setActiveTab("Trends")}
-            className={`pb-3 px-3 md:px-4 border-b-2 transition-colors text-sm md:text-base whitespace-nowrap ${
+            className={` p-3 md:px-4 border-b-2 transition-colors cursor-pointer hover:bg-gray-100 text-sm md:text-base whitespace-nowrap ${
               activeTab === "Trends"
                 ? "border-cyan-500 text-cyan-600 font-medium"
                 : "border-transparent text-gray-500 hover:text-gray-700"
@@ -223,7 +223,7 @@ const Reports = () => {
           </button>
           <button
             onClick={() => setActiveTab("Goals")}
-            className={`pb-3 px-3 md:px-4 border-b-2 transition-colors text-sm md:text-base whitespace-nowrap ${
+            className={` p-3 md:px-4 border-b-2 transition-colors cursor-pointer hover:bg-gray-100 text-sm md:text-base whitespace-nowrap ${
               activeTab === "Goals"
                 ? "border-cyan-500 text-cyan-600 font-medium"
                 : "border-transparent text-gray-500 hover:text-gray-700"
@@ -288,61 +288,6 @@ const Reports = () => {
             </div>
 
             {/* Top Expense Categories */}
-            <div className="bg-white rounded-2xl p-6 shadow-md">
-              <h3 className="text-lg font-semibold ml-1 text-gray-800 mb-6">
-                Top Expense Categories
-              </h3>
-              <div className="space-y-4">
-                {topCategories.length > 0 ? (
-                  topCategories.map((category, index) => {
-                    const percentage =
-                      totalExpenses > 0
-                        ? ((category.amount / totalExpenses) * 100).toFixed(1)
-                        : "0.0";
-                    return (
-                      <div
-                        key={category.name}
-                        className="flex items-center justify-between bg-gray-100 rounded-xl px-10 py-5"
-                      >
-                        <div className="flex items-center gap-4 flex-1">
-                          <span className="text-gray-700 font-medium w-32">
-                            {category.name}
-                          </span>
-                          <div className="flex-1">
-                            <div className="h-2 bg-gray-200 rounded-full overflow-hidden">
-                              <div
-                                className="h-full rounded-full transition-all duration-500"
-                                style={{
-                                  width: `${percentage}%`,
-                                  backgroundColor:
-                                    COLORS[index % COLORS.length],
-                                }}
-                              ></div>
-                            </div>
-                          </div>
-                        </div>
-                        <div className="flex items-center gap-4 ml-4">
-                          <span className="text-gray-600 font-medium w-20 text-right">
-                            ${category.amount.toLocaleString()}
-                          </span>
-                          <span
-                            className={`text-sm font-medium ${
-                              index === 0 ? "text-red-600" : "text-green-600"
-                            } w-16 text-right`}
-                          >
-                            {index === 0 ? "↑ 8%" : "↓ 12%"}
-                          </span>
-                        </div>
-                      </div>
-                    );
-                  })
-                ) : (
-                  <div className="text-center py-8 text-gray-500">
-                    No expense data available
-                  </div>
-                )}
-              </div>
-            </div>
           </>
         )}
 
@@ -390,7 +335,7 @@ const Reports = () => {
                   topCategories.map((category, index) => (
                     <div
                       key={category.name}
-                      className="flex items-center justify-between p-4 bg-gray-50 rounded-lg hover:bg-gray-100 transition-colors"
+                      className="flex items-center justify-between p-4 bg-white rounded-lg hover:bg-gray-100 transition-colors"
                     >
                       <div className="flex items-center gap-3">
                         <div
@@ -468,12 +413,66 @@ const Reports = () => {
 
         {/* Goals Tab Placeholder */}
         {activeTab === "Goals" && (
-          <div className="bg-white rounded-2xl p-12 shadow-md text-center">
+          <div className="bg-white rounded-2xl p-12 shadow-md text-center mb-5">
             <p className="text-gray-500 text-lg">
               Goals content coming soon...
             </p>
           </div>
         )}
+        <div className="bg-white rounded-2xl p-6 shadow-md">
+          <h3 className="text-lg font-semibold ml-1 text-gray-800 mb-6">
+            Top Expense Categories
+          </h3>
+          <div className="space-y-4">
+            {topCategories.length > 0 ? (
+              topCategories.map((category, index) => {
+                const percentage =
+                  totalExpenses > 0
+                    ? ((category.amount / totalExpenses) * 100).toFixed(1)
+                    : "0.0";
+                return (
+                  <div
+                    key={category.name}
+                    className="flex items-center justify-between bg-gray-100 rounded-xl px-10 py-5"
+                  >
+                    <div className="flex items-center gap-4 flex-1">
+                      <span className="text-gray-700 font-medium w-32">
+                        {category.name}
+                      </span>
+                      <div className="flex-1">
+                        <div className="h-2 bg-gray-200 rounded-full overflow-hidden">
+                          <div
+                            className="h-full rounded-full transition-all duration-500"
+                            style={{
+                              width: `${percentage}%`,
+                              backgroundColor: COLORS[index % COLORS.length],
+                            }}
+                          ></div>
+                        </div>
+                      </div>
+                    </div>
+                    <div className="flex items-center gap-4 ml-4">
+                      <span className="text-gray-600 font-medium w-20 text-right">
+                        ${category.amount.toLocaleString()}
+                      </span>
+                      <span
+                        className={`text-sm font-medium ${
+                          index === 0 ? "text-red-600" : "text-green-600"
+                        } w-16 text-right`}
+                      >
+                        {index === 0 ? "↑ 8%" : "↓ 12%"}
+                      </span>
+                    </div>
+                  </div>
+                );
+              })
+            ) : (
+              <div className="text-center py-8 text-gray-500">
+                No expense data available
+              </div>
+            )}
+          </div>
+        </div>
       </div>
     </div>
   );

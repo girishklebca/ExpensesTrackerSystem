@@ -50,7 +50,9 @@ export const createCategory = async (req, res) => {
       icon: icon || "📁",
     });
 
-    res.status(201).json(category);
+    res
+      .status(201)
+      .json({ category, message: "Added Category Successfully ✅" });
   } catch (error) {
     res.status(400).json({ message: error.message });
   }
@@ -97,14 +99,21 @@ export const updateCategory = async (req, res) => {
  */
 export const deleteCategory = async (req, res) => {
   try {
-    const category = await Category.findById(req.params.id);
-    if (!category) {
+    const delCategory = await Category.findById(req.params.id);
+    if (!delCategory) {
       return res.status(404).json({ message: "Category not found" });
     }
 
-    await category.deleteOne();
-    res.status(200).json({ message: "Category deleted successfully" });
+    console.log("Deleting category:", delCategory.name);
+
+    // Then delete the category
+    await delCategory.deleteOne();
+
+    res.status(200).json({
+      message: "Category deleted successfully",
+    });
   } catch (error) {
+    console.error("Error deleting category:", error);
     res.status(500).json({ message: error.message });
   }
 };

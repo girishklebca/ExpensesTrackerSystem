@@ -26,8 +26,10 @@ import {
   FaTrash,
   FaTimes,
 } from "react-icons/fa";
+import { useNavigate } from "react-router-dom";
 
 const Categories = () => {
+  const navigate = useNavigate();
   const { data: categories = [], isLoading } = useGetCategoriesQuery();
   const { data: transactions = [] } = useGetTransactionsQuery();
   const { data: summary } = useGetSummaryQuery();
@@ -94,7 +96,7 @@ const Categories = () => {
     }
 
     try {
-      await addCategory({
+      const res = await addCategory({
         name: categoryName,
         type: "both",
         color: "#3B82F6",
@@ -103,17 +105,17 @@ const Categories = () => {
 
       setSnackbar({
         open: true,
-        message: "Category added successfully!",
+        message: res.message || "Category added successfully!",
         severity: "success",
       });
 
       setCategoryName("");
       setSelectedIcon("📁");
       setOpenDialog(false);
-    } catch (error) {
+    } catch (error: any) {
       setSnackbar({
         open: true,
-        message: "Failed to add category",
+        message: error?.data?.message || "Failed to add category.",
         severity: "error",
       });
     }
@@ -127,6 +129,9 @@ const Categories = () => {
         message: "Category deleted successfully!",
         severity: "success",
       });
+      setTimeout(() => {
+        window.location.reload();
+      }, 1000);
     } catch (error) {
       setSnackbar({
         open: true,
@@ -150,14 +155,14 @@ const Categories = () => {
 
   if (isLoading) {
     return (
-      <div className="min-h-[90vh] bg-gray-50 p-8 flex items-center justify-center">
+      <div className="min-h-[90vh] bg-white p-8 flex items-center justify-center">
         <div className="animate-spin rounded-full h-16 w-16 border-b-2 border-cyan-500"></div>
       </div>
     );
   }
 
   return (
-    <div className="min-h-[90vh] bg-gray-50 p-4 md:p-8 page-enter">
+    <div className="min-h-[90vh] bg-white p-4 md:p-8 page-enter">
       <div className="max-w-7xl mx-auto">
         {/* Header */}
         <div className="flex flex-col md:flex-row justify-between items-start md:items-center mb-6 md:mb-8 gap-4">
@@ -169,57 +174,83 @@ const Categories = () => {
               Organize your transactions and set budgets
             </p>
           </div>
-          <button
-            onClick={() => setOpenDialog(true)}
-            className="bg-cyan-500 hover:bg-cyan-600 text-white px-6 py-3 rounded-lg flex items-center gap-2 transition-colors shadow-lg"
-          >
-            <FaPlus />
-            Add Category
-          </button>
+
+          <div className="flex gap-5">
+            <button
+              onClick={() => {
+                navigate("/transactions");
+                window.scrollTo(0, 0);
+              }}
+              className="bg-cyan-500 hover:bg-cyan-600 text-white px-6 py-3 rounded-lg flex items-center gap-2 transition-colors duration-200 shadow-lg cursor-pointer"
+            >
+              Go To Transaction
+            </button>
+            <button
+              onClick={() => setOpenDialog(true)}
+              className="bg-cyan-500 hover:bg-cyan-600 text-white px-6 py-3 rounded-lg flex items-center gap-2 transition-colors duration-200 shadow-lg cursor-pointer"
+            >
+              <FaPlus />
+              Add Category
+            </button>
+          </div>
         </div>
 
+        {/* ============================================================ */}
+        {/* ============================================================ */}
+        {/* ============================================================ */}
         {/* Summary Cards */}
+
         <div className="grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-6 mb-6 md:mb-8">
           {/* Total Budget */}
-          <div className="bg-gradient-to-br from-blue-50 to-blue-100 rounded-2xl p-6 shadow-md border border-blue-200">
+          <div className="bg-gradient-to-br from-blue-50 to-blue-100 rounded-2xl p-6 shadow-md border border-blue-200 hover:scale-110 transition-all duration-700 cursor-pointer">
             <div className="flex justify-between items-start">
               <div>
                 <div className="flex items-center gap-2 mb-2">
                   <FaDollarSign className="text-blue-600" />
-                  <span className="text-blue-600 text-sm">${totalIncome}</span>
+                  <span className="text-blue-600 text-sm">
+                    $
+                    {totalIncome
+                      .toFixed(2)
+                      .replace(/\B(?=(\d{3})+(?!\d))/g, ",")}
+                  </span>
                 </div>
                 <h3 className="text-blue-700 text-sm font-medium mb-2">
                   Total Budget
                 </h3>
                 <p className="text-blue-600 text-xs">Monthly allocation</p>
               </div>
-              <p className="text-3xl font-bold text-blue-800">
-                ${totalIncome.toLocaleString()}
+              <p className="text-xl md:text-2xl lg:text-3xl font-bold text-blue-800">
+                ${totalIncome.toFixed(2).replace(/\B(?=(\d{3})+(?!\d))/g, ",")}
               </p>
             </div>
           </div>
 
           {/* Total Spent */}
-          <div className="bg-gradient-to-br from-red-50 to-red-100 rounded-2xl p-6 shadow-md border border-red-200">
+          <div className="bg-gradient-to-br from-red-50 to-red-100 rounded-2xl p-6 shadow-md border border-red-200 hover:scale-110 transition-all duration-700 cursor-pointer">
             <div className="flex justify-between items-start">
               <div>
                 <div className="flex items-center gap-2 mb-2">
                   <FaArrowDown className="text-red-600" />
-                  <span className="text-red-600 text-sm">${totalSpent}</span>
+                  <span className="text-red-600 text-sm">
+                    $
+                    {totalSpent
+                      .toFixed(2)
+                      .replace(/\B(?=(\d{3})+(?!\d))/g, ",")}
+                  </span>
                 </div>
                 <h3 className="text-red-700 text-sm font-medium mb-2">
                   Total Spent
                 </h3>
                 <p className="text-red-600 text-xs">This month</p>
               </div>
-              <p className="text-3xl font-bold text-red-800">
-                ${totalSpent.toLocaleString()}
+              <p className="text-xl md:text-2xl lg:text-3xl font-bold text-red-800">
+                ${totalSpent.toFixed(2).replace(/\B(?=(\d{3})+(?!\d))/g, ",")}
               </p>
             </div>
           </div>
 
           {/* Budget Used */}
-          <div className="bg-gradient-to-br from-green-50 to-green-100 rounded-2xl p-6 shadow-md border border-green-200">
+          <div className="bg-gradient-to-br from-green-50 to-green-100 rounded-2xl p-6 shadow-md border border-green-200 hover:scale-110 transition-all duration-700 cursor-pointer">
             <div className="flex justify-between items-start">
               <div>
                 <div className="flex items-center gap-2 mb-2">
@@ -231,10 +262,15 @@ const Categories = () => {
                 </h3>
                 <p className="text-green-600 text-xs">Overall utilization</p>
               </div>
-              <p className="text-3xl font-bold text-green-800">{budgetUsed}%</p>
+              <p className="text-xl md:text-2xl lg:text-3xl font-bold text-green-800">
+                {budgetUsed}%
+              </p>
             </div>
           </div>
         </div>
+        {/* ============================================================ */}
+        {/* ============================================================ */}
+        {/* ============================================================ */}
 
         {/* Expense Categories */}
         <div className="bg-white rounded-2xl p-6 shadow-md mb-8">
@@ -245,7 +281,7 @@ const Categories = () => {
             </h2>
           </div>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 ">
             {expenseCategories.length > 0 ? (
               expenseCategories.map((category) => {
                 const spent = getCategoryExpense(category.name);
@@ -254,7 +290,7 @@ const Categories = () => {
                 return (
                   <div
                     key={category._id}
-                    className="bg-gray-50 rounded-xl p-5 hover:shadow-md transition-shadow group relative"
+                    className="bg-white rounded-xl p-5 hover:shadow-md transition-shadow group relative"
                   >
                     {/* Category Header */}
                     <div className="flex items-center justify-between mb-4">
@@ -271,7 +307,7 @@ const Categories = () => {
                       </div>
                       <button
                         onClick={() => handleDeleteCategory(category._id!)}
-                        className="opacity-0 group-hover:opacity-100 text-red-500 hover:text-red-700 transition-opacity"
+                        className="opacity-0 group-hover:opacity-100 text-red-500 hover:text-red-700 transition-opacity cursor-pointer"
                       >
                         <FaTrash />
                       </button>
@@ -312,6 +348,10 @@ const Categories = () => {
           </div>
         </div>
 
+        {/* ============================================================ */}
+        {/* ============================================================ */}
+        {/* ============================================================ */}
+
         {/* Income Categories */}
         <div className="bg-white rounded-2xl p-6 shadow-md">
           <div className="flex items-center gap-2 mb-6">
@@ -330,7 +370,7 @@ const Categories = () => {
                 return (
                   <div
                     key={category._id}
-                    className="bg-gray-50 rounded-xl p-5 hover:shadow-md transition-shadow group relative"
+                    className="bg-white rounded-xl p-5 hover:shadow-md transition-shadow group relative"
                   >
                     {/* Category Header */}
                     <div className="flex items-center justify-between mb-4">
@@ -374,6 +414,10 @@ const Categories = () => {
         </div>
       </div>
 
+      {/* ============================================================ */}
+      {/* ============================================================ */}
+      {/* ============================================================ */}
+
       {/* Add Category Dialog */}
       <Dialog
         open={openDialog}
@@ -386,7 +430,7 @@ const Categories = () => {
           Add New Category
           <button
             onClick={() => setOpenDialog(false)}
-            className="absolute right-4 top-[40px] -translate-y-1/2 text-white hover:text-white cursor-pointer hover:bg-black transition-colors bg-gray-500 rounded-4xl p-2"
+            className="absolute right-4 top-10 -translate-y-1/2 text-white hover:text-white cursor-pointer hover:bg-black transition-colors bg-white0 rounded-4xl p-2"
           >
             <FaTimes size={20} />
           </button>
@@ -397,9 +441,11 @@ const Categories = () => {
             <TextField
               fullWidth
               label="Category Name"
-              placeholder="e.g., Groceries, Rent, Salary"
+              placeholder="Max 20 characters"
+              helperText="e.g., Groceries, Rent, Salary"
               value={categoryName}
               onChange={(e) => setCategoryName(e.target.value)}
+              inputProps={{ maxLength: 20 } }
             />
 
             {/* Icon Selection */}

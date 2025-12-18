@@ -13,7 +13,7 @@ interface Category {
 export const categoriesApi = createApi({
   reducerPath: "categoriesApi",
   baseQuery: fetchBaseQuery({ baseUrl: "http://localhost:5000/api" }),
-  tagTypes: ["Category"],
+  tagTypes: ["Category", "Transaction"],
   endpoints: (builder) => ({
     getCategories: builder.query<Category[], void>({
       query: () => "/categories",
@@ -32,7 +32,7 @@ export const categoriesApi = createApi({
         url: `/categories/${id}`,
         method: "DELETE",
       }),
-      invalidatesTags: ["Category"],
+      invalidatesTags: ["Category", "Transaction"],
     }),
   }),
 });

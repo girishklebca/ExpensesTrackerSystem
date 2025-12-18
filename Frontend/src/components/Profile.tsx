@@ -34,7 +34,7 @@ const Profile = () => {
   };
 
   return (
-    <div className="min-h-[90vh] bg-gray-50 p-4 md:p-8 page-enter">
+    <div className="min-h-[90vh] bg-white p-4 md:p-8 page-enter">
       <div className="max-w-4xl mx-auto">
         {/* Header */}
         <div className="flex flex-col md:flex-row justify-between items-start md:items-center mb-6 md:mb-8 gap-4">
@@ -105,7 +105,7 @@ const Profile = () => {
                     className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-cyan-500 focus:border-transparent"
                   />
                 ) : (
-                  <p className="text-gray-800 text-base md:text-lg px-4 py-3 bg-gray-50 rounded-lg">
+                  <p className="text-gray-800 text-base md:text-lg px-4 py-3 bg-white rounded-lg">
                     {profileData.name}
                   </p>
                 )}
@@ -127,7 +127,7 @@ const Profile = () => {
                     className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-cyan-500 focus:border-transparent"
                   />
                 ) : (
-                  <p className="text-gray-800 text-base md:text-lg px-4 py-3 bg-gray-50 rounded-lg">
+                  <p className="text-gray-800 text-base md:text-lg px-4 py-3 bg-white rounded-lg">
                     {profileData.email}
                   </p>
                 )}
@@ -149,7 +149,7 @@ const Profile = () => {
                     className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-cyan-500 focus:border-transparent"
                   />
                 ) : (
-                  <p className="text-gray-800 text-base md:text-lg px-4 py-3 bg-gray-50 rounded-lg">
+                  <p className="text-gray-800 text-base md:text-lg px-4 py-3 bg-white rounded-lg">
                     {profileData.phone}
                   </p>
                 )}
@@ -171,7 +171,7 @@ const Profile = () => {
                     className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-cyan-500 focus:border-transparent"
                   />
                 ) : (
-                  <p className="text-gray-800 text-base md:text-lg px-4 py-3 bg-gray-50 rounded-lg">
+                  <p className="text-gray-800 text-base md:text-lg px-4 py-3 bg-white rounded-lg">
                     {profileData.location}
                   </p>
                 )}

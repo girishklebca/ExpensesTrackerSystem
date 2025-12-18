@@ -22,6 +22,7 @@ import {
   Pie,
   Cell,
 } from "recharts";
+import { useState } from "react";
 
 const Dashboard = () => {
   const { data: transactions = [] } = useGetTransactionsQuery();
@@ -68,22 +69,32 @@ const Dashboard = () => {
   // Get recent transactions (last 5)
   const recentTransactions = transactions.slice(0, 5);
 
+  const [hoverCard, setHoverCard] = useState<number | null>(null);
+  const [transactionCard, setTransactionCard] = useState<number | null>(null);
+
   return (
-    <div className="min-h-[90vh] bg-gray-50 p-4 md:p-8 page-enter">
+    <div className="min-h-[90vh] bg-white p-4 md:p-8 page-enter">
       <div className="max-w-7xl mx-auto">
         {/* Header */}
-        <div className="flex flex-col md:flex-row justify-between items-start md:items-center mb-6 md:mb-8 gap-4">
+        <div
+          className={`flex flex-col md:flex-row justify-between items-start md:items-center mb-6 md:mb-8 gap-4 transition-all duration-300 ${
+            hoverCard !== null ? "blur-sm" : ""
+          }`}
+        >
           <div className="flex-1">
             <h1 className="text-2xl md:text-3xl font-bold text-gray-800">
               Welcome back! 👋
             </h1>
             <p className="text-sm md:text-base text-gray-500 mt-1">
-              Here's your financial overview for this month (Dashboard)
+              Here's your financial overview for this month
             </p>
           </div>
           <button
-            onClick={() => navigate("/transactions")}
-            className="bg-cyan-500 hover:bg-cyan-600 text-white px-6 py-3 rounded-lg flex items-center gap-2 transition-colors duration-200 shadow-lg"
+            onClick={() => {
+              navigate("/transactions");
+              window.scrollTo(0, 0);
+            }}
+            className="bg-cyan-500 hover:bg-cyan-600 text-white px-6 py-3 rounded-lg flex items-center gap-2 transition-colors duration-200 shadow-lg cursor-pointer"
           >
             <FaPlus />
             Add Transaction
@@ -91,9 +102,15 @@ const Dashboard = () => {
         </div>
 
         {/* Summary Cards */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6 mb-6 md:mb-8">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 lg:gap-12 md:gap-6 mb-6 md:mb-8">
           {/* Total Balance */}
-          <div className="bg-white rounded-2xl p-6 shadow-md border border-gray-200">
+          <div
+            className={`bg-white rounded-2xl p-6 shadow-md border border-gray-200 hover:scale-[1.5] hover:z-10 transition-all duration-500 cursor-pointer ${
+              hoverCard !== null && hoverCard !== 1 ? "blur-sm" : ""
+            }`}
+            onMouseEnter={() => setHoverCard(1)}
+            onMouseLeave={() => setHoverCard(null)}
+          >
             <div className="flex items-center gap-3 mb-3">
               <div className="bg-blue-100 p-3 rounded-xl">
                 <FaDollarSign className="text-blue-600 text-lg" />
@@ -104,13 +121,19 @@ const Dashboard = () => {
               </span>
             </div>
             <h2 className="text-3xl font-bold text-gray-800">
-              ${netAmount.toFixed(0)}
+              ${netAmount.toFixed(0).replace(/\B(?=(\d{3})+(?!\d))/g, ",")}
             </h2>
             <p className="text-gray-500 text-sm mt-1">Total Balance</p>
           </div>
 
           {/* Monthly Income */}
-          <div className="bg-white rounded-2xl p-6 shadow-md border border-gray-200">
+          <div
+            className={`bg-white rounded-2xl p-6 shadow-md border border-gray-200 hover:scale-[1.5] hover:z-10 transition-all duration-700 cursor-pointer ${
+              hoverCard !== null && hoverCard !== 2 ? "blur-sm" : ""
+            }`}
+            onMouseEnter={() => setHoverCard(2)}
+            onMouseLeave={() => setHoverCard(null)}
+          >
             <div className="flex items-center gap-3 mb-3">
               <div className="bg-green-100 p-3 rounded-xl">
                 <FaArrowUp className="text-green-600 text-lg" />
@@ -121,13 +144,19 @@ const Dashboard = () => {
               </span>
             </div>
             <h2 className="text-3xl font-bold text-gray-800">
-              ${totalIncome.toFixed(0)}
+              ${totalIncome.toFixed(0).replace(/\B(?=(\d{3})+(?!\d))/g, ",")}
             </h2>
             <p className="text-gray-500 text-sm mt-1">Monthly Income</p>
           </div>
 
           {/* Monthly Expenses */}
-          <div className="bg-white rounded-2xl p-6 shadow-md border border-gray-200">
+          <div
+            className={`bg-white rounded-2xl p-6 shadow-md border border-gray-200 hover:scale-[1.5] hover:z-10 transition-all duration-700 cursor-pointer ${
+              hoverCard !== null && hoverCard !== 3 ? "blur-sm" : ""
+            }`}
+            onMouseEnter={() => setHoverCard(3)}
+            onMouseLeave={() => setHoverCard(null)}
+          >
             <div className="flex items-center gap-3 mb-3">
               <div className="bg-red-100 p-3 rounded-xl">
                 <FaArrowDown className="text-red-600 text-lg" />
@@ -138,13 +167,19 @@ const Dashboard = () => {
               </span>
             </div>
             <h2 className="text-3xl font-bold text-gray-800">
-              ${totalExpenses.toFixed(0)}
+              ${totalExpenses.toFixed(0).replace(/\B(?=(\d{3})+(?!\d))/g, ",")}
             </h2>
             <p className="text-gray-500 text-sm mt-1">Monthly Expenses</p>
           </div>
 
           {/* Savings Rate */}
-          <div className="bg-white rounded-2xl p-6 shadow-md border border-gray-200">
+          <div
+            className={`bg-white rounded-2xl p-6 shadow-md border border-gray-200 hover:scale-[1.5] hover:z-10 transition-all duration-700 cursor-pointer ${
+              hoverCard !== null && hoverCard !== 4 ? "blur-sm" : ""
+            }`}
+            onMouseEnter={() => setHoverCard(4)}
+            onMouseLeave={() => setHoverCard(null)}
+          >
             <div className="flex items-center gap-3 mb-3">
               <div className="bg-purple-100 p-3 rounded-xl">
                 <FaChartPie className="text-purple-600 text-lg" />
@@ -159,8 +194,16 @@ const Dashboard = () => {
           </div>
         </div>
 
+        {/* ================================================================================ */}
+        {/* ================================================================================ */}
+        {/* ================================================================================ */}
+
         {/* Charts Section */}
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-4 md:gap-6 mb-6 md:mb-8">
+        <div
+          className={`grid grid-cols-1 lg:grid-cols-3 gap-4 md:gap-6 mb-6 md:mb-8 transition-all duration-300 ${
+            hoverCard !== null ? "blur-sm" : ""
+          }`}
+        >
           {/* Monthly Trend Chart */}
           <div className="lg:col-span-2 bg-white rounded-2xl p-4 md:p-6 shadow-md">
             <h3 className="text-base md:text-lg font-semibold text-gray-800 mb-4 md:mb-6">
@@ -228,7 +271,10 @@ const Dashboard = () => {
                     <span className="text-sm text-gray-600">{entry.name}</span>
                   </div>
                   <span className="text-sm font-semibold text-gray-800">
-                    ${entry.value.toFixed(0)}
+                    $
+                    {entry.value
+                      .toFixed(0)
+                      .replace(/\B(?=(\d{3})+(?!\d))/g, ",")}
                   </span>
                 </div>
               ))}
@@ -237,25 +283,38 @@ const Dashboard = () => {
         </div>
 
         {/* Recent Transactions */}
-        <div className="bg-white rounded-2xl shadow-md overflow-hidden">
+        <div
+          className={`bg-white rounded-2xl shadow-md overflow-hidden transition-all duration-300 ${
+            hoverCard !== null ? "blur-sm" : ""
+          }`}
+        >
           <div className="p-6 border-b border-gray-200 flex justify-between items-center">
             <h2 className="text-xl font-semibold text-gray-800">
               Recent Transactions
             </h2>
             <button
-              onClick={() => navigate("/transactions")}
-              className="text-cyan-600 hover:text-cyan-700 text-sm font-medium"
+              onClick={() => {
+                navigate("/transactions");
+                window.scrollTo(0, 0);
+              }}
+              className="text-cyan-600 hover:text-cyan-800 hover:bg-gray-200 p-2 text-sm font-medium cursor-pointer"
             >
               View All
             </button>
           </div>
 
-          <div className="divide-y divide-gray-200">
+          <div className="flex flex-col gap-2  divide-gray-200">
             {recentTransactions.length > 0 ? (
-              recentTransactions.map((transaction) => (
+              recentTransactions.map((transaction, idx) => (
                 <div
                   key={transaction._id}
-                  className="p-6 hover:bg-gray-50 transition-colors duration-150 flex items-center justify-between"
+                  className={`p-6 hover:bg-white transition-all duration-500 flex items-center justify-between cursor-pointer mb-2 hover:px-100  hover:scale-150 ${
+                    transactionCard !== null && transactionCard !== idx
+                      ? "blur-[5px]"
+                      : ""
+                  } `}
+                  onMouseEnter={() => setTransactionCard(idx)}
+                  onMouseLeave={() => setTransactionCard(null)}
                 >
                   <div className="flex items-center gap-4">
                     {/* Icon */}
@@ -293,7 +352,9 @@ const Dashboard = () => {
                     }`}
                   >
                     {transaction.type === "income" ? "+" : "-"}$
-                    {transaction.amount.toFixed(2)}
+                    {transaction.amount
+                      .toFixed(2)
+                      .replace(/\B(?=(\d{3})+(?!\d))/g, ",")}
                   </p>
                 </div>
               ))

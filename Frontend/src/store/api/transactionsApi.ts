@@ -1,6 +1,13 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
-import type { Transaction } from "../transactionsSlice";
 
+interface Transaction {
+  _id?: string;
+  title: string;
+  amount: number;
+  type: "income" | "expense";
+  category: string;
+  date: string;
+}
 interface SummaryResponse {
   totalIncome: number;
   totalExpenses: number;
