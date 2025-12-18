@@ -430,7 +430,7 @@ const Categories = () => {
           Add New Category
           <button
             onClick={() => setOpenDialog(false)}
-            className="absolute right-4 top-10 -translate-y-1/2 text-white hover:text-white cursor-pointer hover:bg-black transition-colors bg-white0 rounded-4xl p-2"
+            className="absolute right-4 top-10 -translate-y-1/2 text-gray-500 hover:text-black cursor-pointer hover:bg-gray-200  transition-all  rounded-4xl p-2"
           >
             <FaTimes size={20} />
           </button>
@@ -445,7 +445,7 @@ const Categories = () => {
               helperText="e.g., Groceries, Rent, Salary"
               value={categoryName}
               onChange={(e) => setCategoryName(e.target.value)}
-              inputProps={{ maxLength: 20 } }
+              inputProps={{ maxLength: 20 }}
             />
 
             {/* Icon Selection */}

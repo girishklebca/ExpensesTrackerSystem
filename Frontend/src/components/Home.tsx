@@ -30,7 +30,7 @@ const Home = () => {
           <button
             className="bg-cyan-500 text-white px-6 py-2 rounded-lg hover:bg-cyan-700 font-medium cursor-pointer"
             onClick={() => {
-              navigate("/transactions");
+              navigate("/profile");
               window.scrollTo(0, 0);
             }}
           >
