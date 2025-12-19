@@ -100,6 +100,14 @@ const Profile = () => {
         });
         return;
       }
+      if (formData.password.length > 20) {
+        setSnackbar({
+          open: true,
+          message: "Password Must be 20 Characters Maximum",
+          severity: "error",
+        });
+        return;
+      }
       setStep(2);
     }
     // Step 2 validation: Phone and Email
@@ -162,7 +170,7 @@ const Profile = () => {
   };
 
   return (
-    <div className=" bg-white ">
+    <div className=" bg-white">
       {isLoggedIn === false && (
         <div className="min-h-[90vh] bg-[url('https://images.unsplash.com/photo-1504868584819-f8e8b4b6d7e3?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Nnx8Z3JhcGhzfGVufDB8fDB8fHww')] bg-center bg-cover">
           <div className="min-h-[90vh]  bg-black/70 flex flex-col items-center justify-center p-4 md:p-8 ">
@@ -238,19 +246,24 @@ const Profile = () => {
             <FaTimes size={20} />
           </button>
           {/* Left Side - Image */}
-          <div className="hidden md:block md:w-1/2 bg-gradient-to-br from-cyan-500 to-blue-600">
+          <div className="hidden relative md:block md:w-1/2  bg-gradient-to-br from-cyan-500 to-blue-600">
             <img
               src="https://images.pexels.com/photos/4194850/pexels-photo-4194850.jpeg"
               alt="Sign up"
               className="w-full h-full object-cover"
             />
-            {/* <p>
+           <div className=" flex flex-col  justify-center items-center h-full w-full gap-5  lg:text-sm absolute top-0 left-0 bg-black/30 ">
+             <p className="text-4xl text-white">
+              Get Started Here
+            </p>
+             <p className="lg:text-lg md:text-[14px] text-white ">
               Start for free and get attractive offers from the community
-            </p> */}
+            </p>
+           </div>
           </div>
 
           {/* Right Side - Form */}
-          <div className="w-full md:w-1/2 p-6 flex flex-col">
+          <div className="w-full md:w-1/2 p-6 flex flex-col ">
             <DialogTitle className="text-center font-bold text-2xl text-gray-800">
               Create Account
               <p className="text-sm text-gray-500 mt-1">Step {step} of 3</p>
@@ -279,6 +292,7 @@ const Profile = () => {
                           value={formData.name}
                           onChange={handleChange}
                           variant="outlined"
+                          
                         />
                         <TextField
                           fullWidth
@@ -289,6 +303,7 @@ const Profile = () => {
                           value={formData.password}
                           onChange={handleChange}
                           variant="outlined"
+                          helperText="* password must be of 9-20 characters "
                           InputProps={{
                             endAdornment: (
                               <InputAdornment position="end">
@@ -403,7 +418,7 @@ const Profile = () => {
       {/* ================================================== */}
       {isLoggedIn === true && (
         <Fade in={isLoggedIn} timeout={800}>
-          <div className="max-w-4xl mt-20 mx-auto border-2">
+          <div className="max-w-4xl my-20 p-10 mx-auto rounded-4xl shadow-2xl">
             {/* Header */}
             <div className="flex flex-col md:flex-row justify-between items-start md:items-center mb-6 md:mb-8 gap-4">
               <div>
@@ -443,83 +458,81 @@ const Profile = () => {
               </div>
 
               {/* Profile Details */}
-              <div className="p-6 md:p-8 border-2">
+              <div className="p-6 md:p-8 ">
                 <h3 className="text-lg md:text-xl font-semibold text-gray-800 mb-6">
                   Personal Information
                 </h3>
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                   {/* Column 1 */}
-                  <div>
-                    <label className="flex items-center gap-2 text-sm font-medium text-gray-600 mb-2">
+                  <div className="bg-gray-100 rounded-xl py-4 px-4">
+                    <label className="flex items-center gap-2 text-sm font-medium text-gray-600 ">
                       <FaUser className="text-cyan-500" />
                       Full Name
                     </label>
-                    <div>{profileData.name || "Not provided"}</div>
+                    <div className="px-5">{profileData.name || "Not provided"}</div>
                   </div>
 
                   {/* Column 2 */}
-                  <div>
-                    <label className="flex items-center gap-2 text-sm font-medium text-gray-600 mb-2">
+                  <div className="bg-gray-100 rounded-xl py-4 px-4">
+                    <label className="flex items-center gap-2 text-sm font-medium text-gray-600 ">
                       <FaEnvelope className="text-cyan-500" />
                       Email Address
                     </label>
-                    <div>{profileData.email || "Not provided"}</div>
+                    <div className="px-5">{profileData.email || "Not provided"}</div>
                   </div>
 
                   {/* Column 1, Row 2 */}
-                  <div>
-                    <label className="flex items-center gap-2 text-sm font-medium text-gray-600 mb-2">
+                  <div className="bg-gray-100 rounded-xl py-4 px-4">
+                    <label className="flex items-center gap-2 text-sm font-medium text-gray-600 ">
                       <FaPhone className="text-cyan-500" />
                       Phone Number
                     </label>
-                    <div>{profileData.phone || "Not provided"}</div>
+                    <div className="px-5">{profileData.phone || "Not provided"}</div>
                   </div>
 
                   {/* Column 2, Row 2 */}
-                  <div>
-                    <label className="flex items-center gap-2 text-sm font-medium text-gray-600 mb-2">
+                  <div className="bg-gray-100 rounded-xl py-4 px-4">
+                    <label className="flex items-center gap-2 text-sm font-medium text-gray-600 ">
                       <FaMapMarkerAlt className="text-cyan-500" />
                       Location
                     </label>
-                    <div>{profileData.location || "Not provided"}</div>
+                    <div className="px-5">{profileData.location || "Not provided"}</div>
                   </div>
                   {/* Column 1, Row 3 */}
-                  <div>
-                    <label className="flex items-center gap-2 text-sm font-medium text-gray-600 mb-2">
+                  <div className="bg-gray-100 rounded-xl py-4 px-4">
+                    <label className="flex items-center gap-2 text-sm font-medium text-gray-600 ">
                       <FaPhone className="text-cyan-500" />
                       Phone Number
                     </label>
-                    <div>Phone Name</div>
+                    <div className="px-5">Phone Name</div>
                   </div>
 
                   {/* Column 2, Row 3 */}
-                  <div>
-                    <label className="flex items-center gap-2 text-sm font-medium text-gray-600 mb-2">
+                  <div className="bg-gray-100 rounded-xl py-4 px-4">
+                    <label className="flex items-center gap-2 text-sm font-medium text-gray-600 ">
                       <FaMapMarkerAlt className="text-cyan-500" />
                       Location
                     </label>
-                    <div>Location Name</div>
+                    <div className="px-5 ">Location Name</div>
                   </div>
                 </div>
               </div>
             </div>
 
             {/* ==================== */}
-            <div className="flex flex-col gap-2 mb-5">
-              <div>
-                <button
-                  className="w-full bg-cyan-500 py-2 rounded-xl text-white cursor-pointer hover:bg-red-800"
-                  onClick={() => setIsLoggedIn(false)}
-                >
-                  Log Out
-                </button>
-              </div>
-              <div>
-                <button className="w-full bg-cyan-500 py-2 rounded-xl text-white cursor-pointer hover:bg-cyan-800">
-                  Log In With Different Account
-                </button>
-              </div>
+            <div className="flex flex-col items-center gap-2 mb-5">
+              <button
+                className="w-4/5 bg-cyan-500 py-2 border rounded-xl text-white cursor-pointer hover:bg-red-100 hover:border-red-500 hover:text-red-500 transition-all duration-300"
+                onClick={() => setIsLoggedIn(false)}
+              >
+                Log Out
+              </button>
+              <button className="w-4/5 bg-cyan-500 py-2 rounded-xl text-white cursor-pointer hover:bg-cyan-800 transition-all duration-300">
+                Log In With Different Account
+              </button>
             </div>
+
+            {/* ==================== */}
             {/* Stats Card */}
             <div className="bg-white rounded-2xl shadow-md p-6 md:p-8">
               <h3 className="text-lg md:text-xl font-semibold text-gray-800 mb-6">

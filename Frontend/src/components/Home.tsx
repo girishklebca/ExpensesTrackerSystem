@@ -48,38 +48,38 @@ const Home = () => {
         </div>
         {/* ====================================== */}
         {/* ====================================== */}
-        <div className="flex flex-col md:flex-row gap-4 md:gap-6 bg-white px-4 md:px-[36px] py-4 md:py-[30px] rounded-2xl w-full md:w-auto max-w-6xl">
+        <div className="flex flex-col md:flex-row gap-4 md:gap-4 bg-white px-4 md:px-[36px] py-4 md:py-[30px] rounded-2xl w-full md:w-auto max-w-6xl">
           <div
-            className="bg-green-100 text-green-800 px-4 md:pr-10 md:pl-5 py-4 rounded-lg flex-1"
+            className="bg-green-100 md:w-45 text-green-800 px-4 md:pr-5 md:pl-5 py-4 rounded-lg flex-1"
             style={{
               background:
                 "linear-gradient(180deg, rgba(255, 255, 255, 1) 0%, rgba(136, 207, 167, 1) 100%)",
             }}
           >
             <p className="text-sm">Total Income</p>
-            <p className="font-bold text-xl">$15,999</p>
-            <p className="text-[12px]">+ 12% from last month</p>
+            <p className="font-bold text-xl">$16,000</p>
+            <p className="text-[12px]  ">+12% from last month</p>
           </div>
           <div
-            className="bg-green-100 text-red-800 px-4 md:pr-10 md:pl-5 py-4 rounded-lg flex-1"
+            className="bg-green-100 md:w-45 text-red-800 px-4 md:pr-10 md:pl-5 py-4 rounded-lg flex-1"
             style={{
               background:
                 "linear-gradient(180deg, rgba(255, 255, 255, 1) 0%, rgba(199, 24, 24, 0.5) 100%)",
             }}
           >
             <p className="text-sm">Total Expenses</p>
-            <p className="font-bold text-xl">$15,999</p>
-            <p className="text-[12px]">+ 12% from last month</p>
+            <p className="font-bold text-xl">$7,501</p>
+            <p className="text-[12px]">-12% from last month</p>
           </div>
           <div
-            className="bg-green-100 text-[#1447e6] px-4 md:pr-10 md:pl-5 py-4 rounded-lg flex-1"
+            className="bg-green-100 md:w-45 text-[#1447e6] px-4 md:pr-10 md:pl-5 py-4 rounded-lg flex-1"
             style={{
               background:
                 " linear-gradient(180deg,rgba(255, 255, 255, 1) 0%, rgba(131, 192, 252, 1) 100%)",
             }}
           >
-            <p className="text-sm">Total Income</p>
-            <p className="font-bold text-xl">$15,999</p>
+            <p className="text-sm">Total Savings</p>
+            <p className="font-bold text-xl">$9,499</p>
             <p className="text-[12px]">+ 12% from last month</p>
           </div>
         </div>

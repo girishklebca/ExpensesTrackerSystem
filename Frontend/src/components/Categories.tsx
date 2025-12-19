@@ -26,6 +26,7 @@ import {
   FaTrash,
   FaTimes,
 } from "react-icons/fa";
+import { HiDotsVertical } from "react-icons/hi";
 import { useNavigate } from "react-router-dom";
 
 const Categories = () => {
@@ -44,6 +45,9 @@ const Categories = () => {
     message: "",
     severity: "success" as "success" | "error",
   });
+  const [expCatMenu, setExpCatMenu] = useState(false);
+  const [incCatMenu, setIncCatMenu] = useState(false);
+  const [catMenuIdx, setCatMenuIdx] = useState(0);
 
   const { totalIncome = 0, totalExpenses = 0 } = summary || {};
 
@@ -163,6 +167,16 @@ const Categories = () => {
 
   return (
     <div className="min-h-[90vh] bg-white p-4 md:p-8 page-enter">
+      {/* Backdrop to close menu */}
+      {(expCatMenu || incCatMenu) && (
+        <div
+          className="fixed inset-0 z-40"
+          onClick={() => {
+            setExpCatMenu(false);
+            setIncCatMenu(false);
+          }}
+        ></div>
+      )}
       <div className="max-w-7xl mx-auto">
         {/* Header */}
         <div className="flex flex-col md:flex-row justify-between items-start md:items-center mb-6 md:mb-8 gap-4">
@@ -273,7 +287,7 @@ const Categories = () => {
         {/* ============================================================ */}
 
         {/* Expense Categories */}
-        <div className="bg-white rounded-2xl p-6 shadow-md mb-8">
+        <div className="bg-gray-100 rounded-2xl p-6 shadow-md mb-8">
           <div className="flex items-center gap-2 mb-6">
             <FaArrowDown className="text-gray-700" />
             <h2 className="text-xl font-semibold text-gray-800">
@@ -283,7 +297,7 @@ const Categories = () => {
 
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 ">
             {expenseCategories.length > 0 ? (
-              expenseCategories.map((category) => {
+              expenseCategories.map((category, idx) => {
                 const spent = getCategoryExpense(category.name);
                 const transactionCount = getTransactionCount(category.name);
 
@@ -305,12 +319,38 @@ const Categories = () => {
                           </p>
                         </div>
                       </div>
-                      <button
-                        onClick={() => handleDeleteCategory(category._id!)}
-                        className="opacity-0 group-hover:opacity-100 text-red-500 hover:text-red-700 transition-opacity cursor-pointer"
+                      <div
+                        onClick={(e) => {
+                          e.stopPropagation();
+                          setIncCatMenu(false);
+                          if (catMenuIdx === idx && expCatMenu) {
+                            setExpCatMenu(false);
+                          } else {
+                            setExpCatMenu(true);
+                            setCatMenuIdx(idx);
+                          }
+                        }}
+                        className="relative z-50"
                       >
-                        <FaTrash />
-                      </button>
+                        <button className="hover:bg-gray-300 rounded-xl p-1 cursor-pointer">
+                          <HiDotsVertical />
+                        </button>
+                        {expCatMenu && catMenuIdx === idx ? (
+                          <div className="absolute right-5 bg-white shadow-lg rounded-lg border border-gray-200 z-50 min-w-[150px]">
+                            <button
+                              className="w-full h-full text-left py-2 hover:bg-red-50 text-red-600 flex items-center justify-center gap-2 transition-all duration-200 cursor-pointer"
+                              onClick={() =>
+                                handleDeleteCategory(category._id!)
+                              }
+                            >
+                              <FaTrash />
+                              Delete
+                            </button>
+                          </div>
+                        ) : (
+                          ""
+                        )}
+                      </div>
                     </div>
 
                     {/* Spent Amount */}
@@ -353,7 +393,7 @@ const Categories = () => {
         {/* ============================================================ */}
 
         {/* Income Categories */}
-        <div className="bg-white rounded-2xl p-6 shadow-md">
+        <div className="bg-gray-100 rounded-2xl p-6 shadow-md">
           <div className="flex items-center gap-2 mb-6">
             <FaArrowUp className="text-gray-700" />
             <h2 className="text-xl font-semibold text-gray-800">
@@ -363,7 +403,7 @@ const Categories = () => {
 
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
             {incomeCategories.length > 0 ? (
-              incomeCategories.map((category) => {
+              incomeCategories.map((category, idx) => {
                 const earned = getCategoryIncome(category.name);
                 const transactionCount = getTransactionCount(category.name);
 
@@ -385,12 +425,38 @@ const Categories = () => {
                           </p>
                         </div>
                       </div>
-                      <button
-                        onClick={() => handleDeleteCategory(category._id!)}
-                        className="opacity-0 group-hover:opacity-100 text-red-500 hover:text-red-700 transition-opacity"
+                      <div
+                        onClick={(e) => {
+                          e.stopPropagation();
+                          setExpCatMenu(false);
+                          if (catMenuIdx === idx && incCatMenu) {
+                            setIncCatMenu(false);
+                          } else {
+                            setIncCatMenu(true);
+                            setCatMenuIdx(idx);
+                          }
+                        }}
+                        className="relative z-50"
                       >
-                        <FaTrash />
-                      </button>
+                        <button className="hover:bg-gray-300 rounded-xl p-1 cursor-pointer">
+                          <HiDotsVertical />
+                        </button>
+                        {incCatMenu && catMenuIdx === idx ? (
+                          <div className="absolute right-5 bg-white shadow-lg rounded-lg border border-gray-200 z-50 min-w-[150px]">
+                            <button
+                              className="w-full h-full text-left py-2 hover:bg-red-50 text-red-600 flex items-center justify-center gap-2 transition-all duration-200 cursor-pointer"
+                              onClick={() =>
+                                handleDeleteCategory(category._id!)
+                              }
+                            >
+                              <FaTrash />
+                              Delete
+                            </button>
+                          </div>
+                        ) : (
+                          ""
+                        )}
+                      </div>
                     </div>
 
                     {/* Earned Amount */}

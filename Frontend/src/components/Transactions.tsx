@@ -458,6 +458,17 @@ const Transactions = () => {
                     </div>
                   </div>
 
+                  {/* Delete Button - Visible on Mobile */}
+                  <button
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      handleDeleteTransaction(transaction._id!);
+                    }}
+                    className="md:hidden p-3 hover:bg-red-50 text-red-600 rounded-lg transition-all self-end"
+                  >
+                    <FaTrash />
+                  </button>
+
                   {/* Context Menu */}
                   {rightClickedId === transaction._id && contextMenu && (
                     <div
@@ -475,7 +486,7 @@ const Transactions = () => {
                           setContextMenu(null);
                           setRightClickedId(null);
                         }}
-                        className="w-full text-left px-4 py-2 hover:bg-red-50 text-red-600 flex items-center gap-2 transition-colors"
+                        className="w-full text-left px-4 py-2 hover:bg-red-50 text-red-600 flex items-center gap-2 transition-all"
                       >
                         <FaTrash />
                         Delete Transaction

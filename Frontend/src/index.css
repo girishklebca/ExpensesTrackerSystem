@@ -8,6 +8,11 @@ html {
   overflow-y: scroll; /* Always show scrollbar */
 }
 
+body {
+  min-width: 320px; /* Minimum phone screen width */
+  overflow-x: hidden;
+}
+
 /* Page transition animations */
 @keyframes fadeIn {
   from {
